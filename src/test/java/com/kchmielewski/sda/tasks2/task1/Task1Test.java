@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 public abstract class Task1Test {
     private final CopyList tested;
 
-    protected Task1Test(CopyList tested) {
+    Task1Test(CopyList tested) {
         this.tested = tested;
     }
 
