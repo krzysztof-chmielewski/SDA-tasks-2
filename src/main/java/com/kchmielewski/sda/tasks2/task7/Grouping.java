@@ -4,5 +4,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface Grouping {
-    Map<String, Long> counting(List<String> elements);
+    <T> Map<T, Long> counting(List<T> elements);
 }

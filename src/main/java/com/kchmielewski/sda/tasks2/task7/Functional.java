@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Functional implements Grouping {
     @Override
-    public Map<String, Long> counting(List<String> elements) {
+    public <T> Map<T, Long> counting(List<T> elements) {
         return elements.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }

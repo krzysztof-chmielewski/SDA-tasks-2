@@ -6,10 +6,10 @@ import java.util.Map;
 
 public class Imperative implements Grouping {
     @Override
-    public Map<String, Long> counting(List<String> elements) {
-        Map<String, Long> result = new HashMap<>();
+    public <T> Map<T, Long> counting(List<T> elements) {
+        Map<T, Long> result = new HashMap<>();
 
-        for (String element : elements) {
+        for (T element : elements) {
             Long previousCount = result.putIfAbsent(element, 1L);
             if (previousCount != null) {
                 result.put(element, previousCount + 1);
