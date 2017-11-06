@@ -15,7 +15,6 @@ public abstract class Task6Test {
 
     Task6Test(Partitioning tested) {
         this.tested = tested;
-
     }
 
     @Test
