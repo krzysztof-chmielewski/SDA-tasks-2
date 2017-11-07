@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Imperative implements Squares {
     @Override
-    public List<Integer> squares(List<Integer> numbers) {
-        List<Integer> result = new ArrayList<>(numbers.size());
-        for (Integer number : numbers) {
+    public List<Integer> squares(List<Integer> integers) {
+        List<Integer> result = new ArrayList<>(integers.size());
+        for (Integer number : integers) {
             result.add(number * number);
         }
 

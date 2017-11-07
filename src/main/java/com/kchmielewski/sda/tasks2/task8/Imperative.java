@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class Imperative implements AdvancedGrouping {
     @Override
-    public Map<String, List<Integer>> grouping(List<Integer> elements) {
+    public Map<String, List<Integer>> grouping(List<Integer> numbers) {
         Map<String, List<Integer>> result = new HashMap<>();
 
-        for (Integer element : elements) {
+        for (Integer element : numbers) {
             String key = element.toString().substring(0, 1);
             List<Integer> currentValue;
             if (result.containsKey(key)) {
