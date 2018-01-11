@@ -1,14 +1,10 @@
 package com.kchmielewski.sda.tasks2.task7;
 
-import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class Task7Test {
     private final Grouping tested;
@@ -18,34 +14,34 @@ public abstract class Task7Test {
     }
 
     @Test
-    public void forEmptyReturnsEmpty() throws Exception {
-        assertThat(tested.counting(Collections.emptyList()), IsEqual.equalTo(Collections.emptyMap()));
+    public void forEmptyReturnsEmpty() {
+        assertThat(tested.counting(Collections.emptyList())).isEmpty();
     }
 
     @Test
-    public void forOneElementReturnsOneElementWithOneValue() throws Exception {
-        assertThat(tested.counting(Collections.singletonList("QWe")), IsEqual.equalTo(Collections.singletonMap("QWe", 1L)));
+    public void forOneElementReturnsOneElementWithOneValue() {
+        assertThat(tested.counting(Collections.singletonList("QWe"))).containsExactly(new AbstractMap.SimpleImmutableEntry<>("QWe", 1L));
     }
 
     @Test
-    public void forTwoSameElementsReturnsOneElementWithTwoValue() throws Exception {
-        assertThat(tested.counting(Arrays.asList("QWe", "QWe")), IsEqual.equalTo(Collections.singletonMap("QWe", 2L)));
+    public void forTwoSameElementsReturnsOneElementWithTwoValue() {
+        assertThat(tested.counting(Arrays.asList("QWe", "QWe"))).containsExactly(new AbstractMap.SimpleImmutableEntry<>("QWe", 2L));
     }
 
     @Test
-    public void forTwoDifferentElementsReturnsTwoElementsWithOneValue() throws Exception {
+    public void forTwoDifferentElementsReturnsTwoElementsWithOneValue() {
         Map<String, Long> result = new HashMap<>();
         result.put("QWe", 1L);
         result.put("ASD", 1L);
-        assertThat(tested.counting(Arrays.asList("QWe", "ASD")), IsEqual.equalTo(result));
+        assertThat(tested.counting(Arrays.asList("QWe", "ASD"))).isEqualTo(result);
     }
 
     @Test
-    public void forFiveDifferentElementsReturnsProperMap() throws Exception {
+    public void forFiveDifferentElementsReturnsProperMap() {
         Map<String, Long> result = new HashMap<>();
         result.put("QWe", 3L);
         result.put("ASD", 1L);
         result.put("---", 2L);
-        assertThat(tested.counting(Arrays.asList("QWe", "QWe", "---", "ASD", "QWe", "---")), IsEqual.equalTo(result));
+        assertThat(tested.counting(Arrays.asList("QWe", "QWe", "---", "ASD", "QWe", "---"))).isEqualTo(result);
     }
 }

@@ -1,12 +1,12 @@
 package com.kchmielewski.sda.tasks2.task1;
 
-import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class Task1Test {
     private final CopyList tested;
@@ -16,17 +16,23 @@ public abstract class Task1Test {
     }
 
     @Test
-    public void forEmptyEmptyIsReturned() throws Exception {
-        assertThat(tested.copy(Collections.emptyList()), IsEqual.equalTo(Collections.emptyList()));
+    public void forEmptyEmptyIsReturned() {
+        assertThat(tested.copy(Collections.emptyList())).isEmpty();
     }
 
     @Test
-    public void forOneElementThisOneElementIsReturned() throws Exception {
-        assertThat(tested.copy(Collections.singletonList("Qwe")), IsEqual.equalTo(Collections.singletonList("Qwe")));
+    public void forOneElementThisOneElementIsReturned() {
+        assertThat(tested.copy(Collections.singletonList("Qwe"))).containsExactly("Qwe");
     }
 
     @Test
-    public void forThreeElementReturnsThreeElementList() throws Exception {
-        assertThat(tested.copy(Arrays.asList("asd", 123, 9123f)), IsEqual.equalTo(Arrays.asList("asd", 123, 9123f)));
+    public void forThreeElementReturnsThreeElementList() {
+        assertThat(tested.copy(Arrays.asList("asd", 123, 9123f))).containsExactly("asd", 123, 9123f);
+    }
+
+    @Test
+    public void doesNotReturnsSameInstance() {
+        List<String> list = Collections.singletonList("Qwe");
+        assertThat(tested.copy(Collections.singletonList("Qwe"))).isNotSameAs(list);
     }
 }
