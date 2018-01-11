@@ -1,12 +1,11 @@
 package com.kchmielewski.sda.tasks2.task3;
 
-import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class Task3Test {
     private final OnlyPositive tested;
@@ -16,27 +15,27 @@ public abstract class Task3Test {
     }
 
     @Test
-    public void forEmptyEmptyIsReturned() throws Exception {
-        assertThat(tested.positive(Collections.emptyList()), IsEqual.equalTo(Collections.emptyList()));
+    public void forEmptyEmptyIsReturned() {
+        assertThat(tested.positive(Collections.emptyList())).isEmpty();
     }
 
     @Test
-    public void forOnePositiveOneItIsReturned() throws Exception {
-        assertThat(tested.positive(Collections.singletonList(1)), IsEqual.equalTo(Collections.singletonList(1)));
+    public void forOnePositiveOneItIsReturned() {
+        assertThat(tested.positive(Collections.singletonList(1))).containsExactly(1);
     }
 
     @Test
-    public void forZeroEmptyIsReturned() throws Exception {
-        assertThat(tested.positive(Collections.singletonList(0)), IsEqual.equalTo(Collections.emptyList()));
+    public void forZeroEmptyIsReturned() {
+        assertThat(tested.positive(Collections.singletonList(0))).isEmpty();
     }
 
     @Test
-    public void forOneNegativeEmptyIsReturned() throws Exception {
-        assertThat(tested.positive(Collections.singletonList(-1)), IsEqual.equalTo(Collections.emptyList()));
+    public void forOneNegativeEmptyIsReturned() {
+        assertThat(tested.positive(Collections.singletonList(-1))).isEmpty();
     }
 
     @Test
-    public void forMixedOnlyPositiveAreRetained() throws Exception {
-        assertThat(tested.positive(Arrays.asList(12, -5, 0, 32, -34, -99)), IsEqual.equalTo(Arrays.asList(12, 32)));
+    public void forMixedOnlyPositiveAreRetained() {
+        assertThat(tested.positive(Arrays.asList(12, -5, 0, 32, -34, -99))).containsExactly(12, 32);
     }
 }
